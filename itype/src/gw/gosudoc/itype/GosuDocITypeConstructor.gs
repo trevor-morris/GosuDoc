@@ -4,6 +4,7 @@ uses gw.lang.reflect.IConstructorInfo
 uses gw.gosudoc.core.IGosuDocConstructor
 uses gw.gosudoc.core.IGosuDocParameter
 uses gw.gosudoc.core.IGosuDocDescription
+uses gw.gosudoc.core.GosuDocDescription
 
 /**
  * IGosuDocConstructor built on IConstructorInfo information

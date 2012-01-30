@@ -4,6 +4,7 @@ uses gw.gosudoc.core.IGosuDocParameter
 uses gw.gosudoc.core.IGosuDocText
 uses gw.gosudoc.core.IGosuDocTypeReference
 uses gw.lang.reflect.IParameterInfo
+uses gw.gosudoc.core.GosuDocText
 
 /**
  * Represents a constructor or method parameter

@@ -1,7 +1,14 @@
 - Implement Signature for constructor and method HTML
 - Add tag.CrossReference for link/see (contains type, feature/null, label)
+- Add related types (inherited, enhancements, implementations, subclasses, @see)
+- Push to GitHub
 - Handle nested classes
 - Generics handling; what does it mean for file names, links?
 - Move search box to top right, add breadcrumb top left (all/package/type)
 - Package page, lists all types in package
-- Add related types (inherited, enhancements, implementations, subclasses, @see)
+- Add modifiers (static, public etc. - enum and enum set?)
+- Need way to find all ITypes in a package (including enhancements)
+- How is deprecated handled by IType?
+- Subtypes; make sure right methods show up, display super type chain
+- Don't show return type if void
+- InheritDoc

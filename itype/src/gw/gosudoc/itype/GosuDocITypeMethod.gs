@@ -6,6 +6,8 @@ uses gw.lang.reflect.IMethodInfo
 uses gw.gosudoc.core.IGosuDocMethod
 uses gw.gosudoc.core.IGosuDocTypeReference
 uses gw.gosudoc.core.IGosuDocText
+uses gw.gosudoc.core.GosuDocDescription
+uses gw.gosudoc.core.GosuDocText
 
 /**
  * IGosuDocMethod built on IMethodInfo information

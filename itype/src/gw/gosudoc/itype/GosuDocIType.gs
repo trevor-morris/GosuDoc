@@ -11,6 +11,7 @@ uses gw.gosudoc.core.GosuDocTypeCategory
 uses gw.gosudoc.core.IGosuDocDescription
 uses java.lang.Comparable
 uses gw.gosudoc.core.GosuDocScope
+uses gw.gosudoc.core.GosuDocDescription
 
 /**
  * IGosuDocType built on IType and ITypeInfo information

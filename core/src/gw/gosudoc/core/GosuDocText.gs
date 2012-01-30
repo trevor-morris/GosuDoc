@@ -1,4 +1,4 @@
-package gw.gosudoc.itype
+package gw.gosudoc.core
 
 uses gw.gosudoc.core.IGosuDocText
 uses gw.gosudoc.core.GosuDocTag
@@ -11,7 +11,7 @@ uses gw.gosudoc.core.GosuDocScope
 /**
  * Standard implementation of IGosuDocText, represents text with embedded tags
  */
-internal class GosuDocText implements IGosuDocText {
+class GosuDocText implements IGosuDocText {
 
   final static var TAG_PATTERN = Pattern.compile("(^\\s*@(\\w+)\\s*(.*?)\\s*$)|(\\{\\s*@(\\w+)\\s*(.*?)\\s*\\})", Pattern.MULTILINE)
   final static var INLINE_TAG_PATTERN = Pattern.compile("\\{\\s*@(\\w+)\\s*(.*?)\\s*\\}")

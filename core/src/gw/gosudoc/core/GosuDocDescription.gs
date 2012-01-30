@@ -1,4 +1,4 @@
-package gw.gosudoc.itype
+package gw.gosudoc.core
 
 uses gw.gosudoc.core.IGosuDocDescription
 uses gw.gosudoc.core.IGosuDocText
@@ -10,9 +10,9 @@ uses java.lang.StringBuffer
  * Standard implementation of IGosuDoc description, splits text into summary and details based on first
  * period in the text
  */
-internal class GosuDocDescription implements IGosuDocDescription {
+class GosuDocDescription implements IGosuDocDescription {
 
-  final static var END_SUMMARY_PATTERN = Pattern.compile("([.?!])|:?(^\\s*@)", Pattern.MULTILINE)
+  final static var END_SUMMARY_PATTERN = Pattern.compile("([.?!])|(^\\s*(?=@))", Pattern.MULTILINE)
 
   var _scope : GosuDocScope as readonly Scope
   var _summary : IGosuDocText as readonly Summary
