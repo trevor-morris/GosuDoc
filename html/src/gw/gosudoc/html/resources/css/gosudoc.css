@@ -1,0 +1,63 @@
+/*
+  Blue scale, dark -> light
+  #68b3af
+  #87bdb1
+  #aaccb1
+  #c3dbb4
+  #d3e2b6
+  Other Colors:
+  #f0d8d8 mauve
+  #304848 dark gray blue
+*/
+body {
+	font:	normal 12px/20px helvetica,arial,sans-serif;
+	background-color: #d3e2b6;
+  foreground-color: #304848;
+}
+.type h1 {
+  border-top: 2px solid #68b3af;
+  background-color: #87bdb1;
+  padding: 10px;
+  margin: 5px 0px 0px 0px;
+}
+.type .details {
+  padding: 5px 5px 5px 10px;
+}
+.featurelist h1 {
+  border-top: 2px solid #68b3af;
+  background-color: #87bdb1;
+  padding: 10px;
+  margin: 5px 0px 0px 0px;
+}
+.feature .overview {
+  border-top: 1px solid #aaccb1;
+  background-color: c3dbb4;
+}
+.feature .overview h2 {
+  margin: 0px;
+  padding: 8px 8px 8px 12px;
+}
+.feature .overview .summary {
+  margin-top: 0px;
+  padding: 0px 3px 3px 15px;
+}
+.feature .details {
+  padding: 5px 5px 5px 20px;
+}
+dt {
+  font-weight: bold;
+}
+dd dl {
+  margin: 0px;
+}
+dd dt {
+  font-weight: normal;
+  font-family: "Courier New", Courier, monospace;
+  float: left;
+  margin-right: 10px;
+}
+pre {
+  font-family: "Courier New", Courier, monospace;
+  background-color: #ffffff;
+  padding: 5px;
+}

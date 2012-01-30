@@ -1,0 +1,7 @@
+- Implement Signature for constructor and method HTML
+- Add tag.CrossReference for link/see (contains type, feature/null, label)
+- Handle nested classes
+- Generics handling; what does it mean for file names, links?
+- Move search box to top right, add breadcrumb top left (all/package/type)
+- Package page, lists all types in package
+- Add related types (inherited, enhancements, implementations, subclasses, @see)
