@@ -8,10 +8,10 @@ uses gw.gosudoc.html.templates.GosuDocFeatureHtmlTemplate
  */
 abstract class GosuDocFeatureHtml {
 
-  var _feature : IGosuDocFeature
+  var _feature : IGosuDocFeature as Feature
 
-  construct(feature : IGosuDocFeature) {
-    _feature = feature
+  construct(gosuDocFeature : IGosuDocFeature) {
+    _feature = gosuDocFeature
   }
 
   property get Overview() : String {

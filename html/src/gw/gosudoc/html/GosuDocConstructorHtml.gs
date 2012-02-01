@@ -1,21 +1,20 @@
 package gw.gosudoc.html
 
 uses gw.gosudoc.core.IGosuDocConstructor
+uses gw.gosudoc.core.IGosuDocFeatureWithParameters
+uses java.lang.StringBuilder
 
 /**
  * Generates HTML for a Gosu constructor
  */
-class GosuDocConstructorHtml extends GosuDocFeatureHtml {
-
-  var _constructor : IGosuDocConstructor
+class GosuDocConstructorHtml extends GosuDocFeatureWithParametersHtml {
 
   construct(constructor : IGosuDocConstructor) {
     super(constructor)
-    _constructor = constructor
   }
 
   override property get Signature() : String {
-    return "signature"
+    return splitAtSeparatorIfTooLong("construct" + ParameterSignaturesWithSeparator)
   }
 
 }

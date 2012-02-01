@@ -1,11 +1,12 @@
 package gw.gosudoc.html
 
 uses gw.gosudoc.core.IGosuDocMethod
+uses java.util.jar.Attributes.Name
 
 /**
  * Generates HTML for a Gosu method
  */
-class GosuDocMethodHtml extends GosuDocFeatureHtml {
+class GosuDocMethodHtml extends GosuDocFeatureWithParametersHtml {
 
   var _method : IGosuDocMethod
 
@@ -15,7 +16,10 @@ class GosuDocMethodHtml extends GosuDocFeatureHtml {
   }
 
   override property get Signature() : String {
-    return "signature"
+    var returnType = _method.ReturnType != null
+            ? SEPARATOR + ": " + _method.ReturnType.Html.generate()
+            : ""
+    return splitAtSeparatorIfTooLong("function " + _method.Name + ParameterSignaturesWithSeparator + returnType)
   }
 
 }

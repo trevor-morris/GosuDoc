@@ -8,6 +8,7 @@ uses gw.gosudoc.core.IGosuDocTypeReference
 uses gw.gosudoc.core.IGosuDocText
 uses gw.gosudoc.core.GosuDocDescription
 uses gw.gosudoc.core.GosuDocText
+uses gw.lang.reflect.TypeSystem
 
 /**
  * IGosuDocMethod built on IMethodInfo information
@@ -20,7 +21,7 @@ internal class GosuDocITypeMethod extends GosuDocITypeFeatureWithParameters impl
 
   construct(owner : GosuDocIType, method : IMethodInfo) {
     super(owner, method.DisplayName, new GosuDocDescription(owner.Scope, method.Description), method.Parameters)
-    _returnType = new GosuDocITypeReference (owner.DocSet, method.ReturnType)
+    _returnType = new GosuDocITypeReference(owner.DocSet, method.ReturnType)
     _returnDescription = new GosuDocText(owner.Scope, method.ReturnDescription)
     _uniqueName = method.DisplayName + '(' + ParametersAsString + ") : " + _returnType.FullName
   }
