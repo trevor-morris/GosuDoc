@@ -52,4 +52,10 @@ class GosuDocDescriptionTest extends TestCase {
     assertEquals("@tag Details", description.Details.RawText)
   }
 
+  function testTagWithNestedPeriod() {
+    var description = new GosuDocDescription(GosuDocSetStub.emptyScope(), " Summary {@link gw.x.y.Z}\n   @tag Details ")
+    assertEquals("Summary {@link gw.x.y.Z}", description.Summary.RawText)
+    assertEquals("@tag Details", description.Details.RawText)
+  }
+
 }

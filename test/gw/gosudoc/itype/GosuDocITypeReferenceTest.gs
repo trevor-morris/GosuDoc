@@ -27,14 +27,14 @@ class GosuDocITypeReferenceTest extends TestCase {
   }
 
   function testSimpleBlock() {
-    var method = GosuDocITypeReferenceTest #takesSimpleBlock()
+    var method = GosuDocITypeReferenceTest#takesSimpleBlock()
     var blockType = method.MethodInfo.Parameters[0].FeatureType
     var ref = new GosuDocITypeReference (new TypeLookup({}), blockType)
     assertEquals("block(String) : Date", ref.FullName)
   }
 
   function testBlockWithExpansion() {
-    var method = GosuDocITypeReferenceTest #takesSimpleBlock()
+    var method = GosuDocITypeReferenceTest#takesSimpleBlock()
     var blockType = method.MethodInfo.Parameters[0].FeatureType
     var ref = new GosuDocITypeReference (new TypeLookup({String -> "GosuDocString"}), blockType)
     var formattedName = ref.formatFullName(createFormatter())
@@ -48,14 +48,14 @@ class GosuDocITypeReferenceTest extends TestCase {
   }
 
   function testBoundGenericType() {
-    var method = GosuDocITypeReferenceTest #returnsBoundGeneric()
+    var method = GosuDocITypeReferenceTest#returnsBoundGeneric()
     var listType = method.MethodInfo.ReturnType
     var ref = new GosuDocITypeReference (new TypeLookup({}), listType)
     assertEquals("List&lt;String&gt;", ref.FullName)
   }
 
   function testBoundGenericBlockType() {
-    var method = GosuDocITypeReferenceTest #returnsBoundGenericBlock()
+    var method = GosuDocITypeReferenceTest#returnsBoundGenericBlock()
     var blockType = method.MethodInfo.ReturnType
     var ref = new GosuDocITypeReference (new TypeLookup({String -> "GosuDocString"}), blockType)
     var formattedName = ref.formatFullName(createFormatter())
@@ -63,7 +63,7 @@ class GosuDocITypeReferenceTest extends TestCase {
   }
 
   function testUnboundGenericBlockType() {
-    var method = GosuDocITypeReferenceTest #returnsUnboundGenericBlock()
+    var method = GosuDocITypeReferenceTest#returnsUnboundGenericBlock()
     var blockType = method.MethodInfo.ReturnType
     var ref = new GosuDocITypeReference (new TypeLookup({Integer -> "GosuDocInteger"}), blockType)
     var formattedName = ref.formatFullName(createFormatter())

@@ -7,6 +7,11 @@ package gw.gosudoc.core
 interface IGosuDocText {
 
   /**
+   * Scope containing this text
+   */
+  property get Scope() : GosuDocScope
+
+  /**
    * True if the text is empty, either non existent or entirely whitespace
    */
   property get IsEmpty() : boolean

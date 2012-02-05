@@ -50,7 +50,7 @@ class GosuDocTypeSimpleClassTest extends TestCase {
     var method = methods.first()
     assertEquals("Simple method with a string argument", method.Description.Summary.RawText)
     assertTrue(method.Description.Details.IsEmpty)
-    assertEquals("simpleMethod(String) : boolean", method.UniqueName)
+    assertEquals("simpleMethod(String)", method.UniqueName)
   }
 
   function testSimpleClassPackage() {
