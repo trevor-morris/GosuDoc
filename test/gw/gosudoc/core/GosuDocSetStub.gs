@@ -18,4 +18,8 @@ class GosuDocSetStub implements IGosuDocSet {
   override function getTypeByName(typeName: String): IGosuDocType {
     return null
   }
+
+  override function getTypesByRelativeName(typeName: String): List<IGosuDocType> {
+    return null
+  }
 }

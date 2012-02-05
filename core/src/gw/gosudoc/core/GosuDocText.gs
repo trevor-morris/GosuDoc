@@ -36,9 +36,9 @@ class GosuDocText implements IGosuDocText {
       var tag : GosuDocTag
       var isLineBasedTag = matcher.group(2) != null
       if (isLineBasedTag) {
-        tag = new GosuDocTag(this, matcher.group(2), formatTagArguments(matcher.group(3), tagHandler))
+        tag = new GosuDocTag(false, this, matcher.group(2), formatTagArguments(matcher.group(3), tagHandler))
       } else {
-        tag = new GosuDocTag(this, matcher.group(5), matcher.group(6))
+        tag = new GosuDocTag(true, this, matcher.group(5), matcher.group(6))
       }
       matcher.appendReplacement(buffer, tagHandler(tag))
     }
@@ -50,7 +50,7 @@ class GosuDocText implements IGosuDocText {
     var buffer = new StringBuffer()
     var matcher = INLINE_TAG_PATTERN.matcher(args)
     while (matcher.find()) {
-      var tag = new GosuDocTag(this, matcher.group(1), matcher.group(2))
+      var tag = new GosuDocTag(true, this, matcher.group(1), matcher.group(2))
       matcher.appendReplacement(buffer, tagHandler(tag))
     }
     matcher.appendTail(buffer)

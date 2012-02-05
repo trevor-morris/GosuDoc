@@ -5,13 +5,23 @@ uses java.util.Date
 uses java.io.Reader
 uses gw.gosudoc.itype.GosuDocITypeSet
 uses gw.lang.reflect.features.BoundMethodReference
+uses example.gosudoc.SimpleClass
 
 class GosuDocCrossReferenceTest extends TestCase {
 
   var _thisType : IGosuDocType
+  var _simpleType : IGosuDocType
+
+  construct() {}
+
+  construct(testName : String) {
+    super(testName)
+  }
 
   override function setUp() {
-    _thisType = new GosuDocITypeSet({typeof this}).gosuDocTypeForIType(typeof this)
+    var docSet = new GosuDocITypeSet({typeof this,SimpleClass})
+    _thisType = docSet.gosuDocTypeForIType(typeof this)
+    _simpleType = docSet.gosuDocTypeForIType(SimpleClass)
   }
 
   /**
@@ -20,7 +30,6 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testSimpleTypeCrossReference() {
     var linkTag = findLinkTagFor(this#testSimpleTypeCrossReference())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertNull(crossReference.Feature)
     assertEquals("GosuDocCrossReferenceTest", crossReference.Label)
@@ -32,7 +41,6 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testRelativeTypeCrossReference() {
     var linkTag = findLinkTagFor(this#testRelativeTypeCrossReference())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertNull(crossReference.Feature)
     assertEquals("GosuDocCrossReferenceTest", crossReference.Label)
@@ -44,7 +52,6 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testRelativeTypeCrossReferenceWithLabel() {
     var linkTag = findLinkTagFor(this#testRelativeTypeCrossReferenceWithLabel())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertNull(crossReference.Feature)
     assertEquals("with a label", crossReference.Label)
@@ -56,11 +63,44 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testRelativeMethodCrossReference() {
     var linkTag = findLinkTagFor(this#testRelativeMethodCrossReference())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertTrue(crossReference.Feature typeis IGosuDocMethod)
     assertEquals("simpleFunction", crossReference.Feature.Name)
-    assertEquals("GosuDocCrossReferenceTest.simpleFunction()", crossReference.Label)
+    assertEquals("simpleFunction()", crossReference.Label)
+  }
+
+  /**
+   * Relative link to function in this type, name only, no type {@link #simpleFunction}
+   */
+  function testRelativeMethodWithNoTypeCrossReference() {
+    var linkTag = findLinkTagFor(this#testRelativeMethodWithNoTypeCrossReference())
+    var crossReference = linkTag.parseCrossReference()
+    assertEquals(_thisType, crossReference.Type)
+    assertTrue(crossReference.Feature typeis IGosuDocMethod)
+    assertEquals("simpleFunction", crossReference.Feature.Name)
+    assertEquals("simpleFunction()", crossReference.Label)
+  }
+
+  /**
+   * Relative link to constructor in this type, name only {@link #construct}
+   */
+  function testRelativeConstructor() {
+    var linkTag = findLinkTagFor(this#testRelativeConstructor())
+    var crossReference = linkTag.parseCrossReference()
+    assertEquals(_thisType, crossReference.Type)
+    assertTrue(crossReference.Feature typeis IGosuDocConstructor)
+    assertEquals("construct()", crossReference.Label)
+  }
+
+  /**
+   * Relative link to constructor in this type, name only {@link #construct(String)}
+   */
+  function testRelativeConstructorWithArg() {
+    var linkTag = findLinkTagFor(this#testRelativeConstructorWithArg())
+    var crossReference = linkTag.parseCrossReference()
+    assertEquals(_thisType, crossReference.Type)
+    assertTrue(crossReference.Feature typeis IGosuDocConstructor)
+    assertEquals("construct(String)", crossReference.Label)
   }
 
   /**
@@ -69,11 +109,10 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testRelativeAmbiguousNameCrossReference() {
     var linkTag = findLinkTagFor(this#testRelativeAmbiguousNameCrossReference())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertTrue(crossReference.Feature typeis IGosuDocProperty)
     assertEquals("confusingName", crossReference.Feature.Name)
-    assertEquals("GosuDocCrossReferenceTest.confusingName", crossReference.Label)
+    assertEquals("confusingName", crossReference.Label)
   }
 
   /**
@@ -82,11 +121,10 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testRelativeAmbiguousNameCrossReferenceWithArguments() {
     var linkTag = findLinkTagFor(this#testRelativeAmbiguousNameCrossReferenceWithArguments())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertTrue(crossReference.Feature typeis IGosuDocMethod)
     assertEquals("confusingName", crossReference.Feature.Name)
-    assertEquals("GosuDocCrossReferenceTest.confusingName()", crossReference.Label)
+    assertEquals("confusingName()", crossReference.Label)
   }
 
   /**
@@ -95,11 +133,10 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testRelativeOverloadedNameOneArg() {
     var linkTag = findLinkTagFor(this#testRelativeOverloadedNameOneArg())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertTrue(crossReference.Feature typeis IGosuDocMethod)
     assertEquals("overloadedSimple", crossReference.Feature.Name)
-    assertEquals("GosuDocCrossReferenceTest.overloadedSimple(int)", crossReference.Label)
+    assertEquals("overloadedSimple(int)", crossReference.Label)
   }
 
   /**
@@ -108,11 +145,10 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testRelativeOverloadedNameTwoArgs() {
     var linkTag = findLinkTagFor(this#testRelativeOverloadedNameTwoArgs())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertTrue(crossReference.Feature typeis IGosuDocMethod)
     assertEquals("overloadedSimple", crossReference.Feature.Name)
-    assertEquals("GosuDocCrossReferenceTest.overloadedSimple(int,int)", crossReference.Label)
+    assertEquals("overloadedSimple(int,int)", crossReference.Label)
   }
 
   /**
@@ -121,11 +157,87 @@ class GosuDocCrossReferenceTest extends TestCase {
   function testRelativeOverloadedNameBlockArg() {
     var linkTag = findLinkTagFor(this#testRelativeOverloadedNameBlockArg())
     var crossReference = linkTag.parseCrossReference()
-    assertNotNull(crossReference)
     assertEquals(_thisType, crossReference.Type)
     assertTrue(crossReference.Feature typeis IGosuDocMethod)
     assertEquals("takesBlock", crossReference.Feature.Name)
-    assertEquals("GosuDocCrossReferenceTest.takesBlock(block(int,block(float,float) : String) : Date)", crossReference.Label)
+    assertEquals("takesBlock(block(int,block(float,float) : String) : Date)", crossReference.Label)
+  }
+
+  /**
+   * Link to type not in doc set {@link gw.BogusType}
+   */
+  function testUnresolvableTypeLink() {
+    var linkTag = findLinkTagFor(this#testUnresolvableTypeLink())
+    var crossReference = linkTag.parseCrossReference()
+    assertNull(crossReference.Type)
+    assertNull(crossReference.Feature)
+    assertEquals("gw.BogusType", crossReference.Label)
+  }
+
+  /**
+   * Link to feature not in doc set {@link gw.BogusType#feature}
+   */
+  function testUnresolvableFeatureLink() {
+    var linkTag = findLinkTagFor(this#testUnresolvableFeatureLink())
+    var crossReference = linkTag.parseCrossReference()
+    assertNull(crossReference.Type)
+    assertNull(crossReference.Feature)
+    assertEquals("gw.BogusType#feature", crossReference.Label)
+  }
+
+  /**
+   * Link to feature not in doc set {@link gw.BogusType#feature(int) hello there}
+   */
+  function testUnresolvableFeatureLinkWithLabel() {
+    var linkTag = findLinkTagFor(this#testUnresolvableFeatureLinkWithLabel())
+    var crossReference = linkTag.parseCrossReference()
+    assertNull(crossReference.Type)
+    assertNull(crossReference.Feature)
+    assertEquals("hello there", crossReference.Label)
+  }
+
+  /**
+   * Link to {@link example.gosudoc.SimpleClass}
+   */
+  function testFullLinkToOtherType() {
+    var linkTag = findLinkTagFor(this#testFullLinkToOtherType())
+    var crossReference = linkTag.parseCrossReference()
+    assertEquals(_simpleType, crossReference.Type)
+    assertNull(crossReference.Feature)
+    assertEquals("SimpleClass", crossReference.Label)
+  }
+
+  /**
+   * Link to {@link SimpleClass}
+   */
+  function testRelativeLinkToOtherType() {
+    var linkTag = findLinkTagFor(this#testRelativeLinkToOtherType())
+    var crossReference = linkTag.parseCrossReference()
+    assertEquals(_simpleType, crossReference.Type)
+    assertNull(crossReference.Feature)
+    assertEquals("SimpleClass", crossReference.Label)
+  }
+
+  /**
+   * Link to {@link SimpleClass#simpleMethod}
+   */
+  function testRelativeLinkToOtherTypeFeature() {
+    var linkTag = findLinkTagFor(this#testRelativeLinkToOtherTypeFeature())
+    var crossReference = linkTag.parseCrossReference()
+    assertEquals(_simpleType, crossReference.Type)
+    assertTrue(crossReference.Feature typeis IGosuDocMethod)
+    assertEquals("SimpleClass.simpleMethod(String)", crossReference.Label)
+  }
+
+  /**
+   * Link to {@link SimpleClass#construct}
+   */
+  function testRelativeLinkToOtherTypeConstructor() {
+    var linkTag = findLinkTagFor(this#testRelativeLinkToOtherTypeConstructor())
+    var crossReference = linkTag.parseCrossReference()
+    assertEquals(_simpleType, crossReference.Type)
+    assertTrue(crossReference.Feature typeis IGosuDocConstructor)
+    assertEquals("SimpleClass.construct(int)", crossReference.Label)
   }
 
   function simpleFunction() {

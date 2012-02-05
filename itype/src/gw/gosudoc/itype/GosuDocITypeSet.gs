@@ -20,14 +20,21 @@ class GosuDocITypeSet implements IGosuDocSet, ITypeToGosuDocType {
 
   var _scope : GosuDocScope as readonly Scope
   var _gosuDocTypesByName : Map<String, GosuDocIType>
+  var _gosuDocTypesByRelativeName : Map<String, List<GosuDocIType>>
   var _packagesByName = new CaseInsensitiveHashMap<String, GosuDocITypePackage>();
 
   construct(typeSet : Set<IType>) {
     _scope = new GosuDocScope(this, null, null)
     _gosuDocTypesByName = new CaseInsensitiveHashMap<String, GosuDocIType>(typeSet.Count)
+    _gosuDocTypesByRelativeName = new CaseInsensitiveHashMap<String, List<GosuDocIType>>(typeSet.Count)
     for (type in typeSet) {
       for (gosuDocType in GosuDocIType.createFromIType(this, type)) {
         _gosuDocTypesByName.put(gosuDocType.Type.Name, gosuDocType)
+        if (_gosuDocTypesByRelativeName.containsKey(gosuDocType.Type.RelativeName)) {
+          _gosuDocTypesByRelativeName.get(gosuDocType.Type.RelativeName).add(gosuDocType)
+        } else {
+          _gosuDocTypesByRelativeName.put(gosuDocType.Type.RelativeName, {gosuDocType})
+        }
       }
     }
   }
@@ -41,6 +48,11 @@ class GosuDocITypeSet implements IGosuDocSet, ITypeToGosuDocType {
 
   override function getTypeByName(typeName : String) : GosuDocIType {
     return _gosuDocTypesByName.get(typeName)
+  }
+
+  override function getTypesByRelativeName(typeName : String) : List<GosuDocIType> {
+    var matches = _gosuDocTypesByRelativeName.get(typeName)
+    return matches != null ? Collections.unmodifiableList(matches) : Collections.emptyList()
   }
 
   override function gosuDocTypeForIType(type: IType): GosuDocIType {

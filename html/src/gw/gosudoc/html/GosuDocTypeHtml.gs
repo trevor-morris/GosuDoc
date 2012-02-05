@@ -45,6 +45,10 @@ class GosuDocTypeHtml {
     return _type.Name
   }
 
+  property get Url() : String {
+    return Path
+  }
+
   property get Path() : String {
     return _type.Package.Html.Path + "/" + _type.Name + ".html"
   }
