@@ -40,6 +40,7 @@ class GosuDocSetHtml {
   }
 
   private property get ResourceRoot(): IDirectory {
+    // TODO must be a better way than this?
     var gosuDocCss = (typeof this).TypeLoader.Module.FileRepository.findFirstFile("gw/gosudoc/html/resources/css/gosudoc.css")
     return gosuDocCss.Parent.Parent
   }

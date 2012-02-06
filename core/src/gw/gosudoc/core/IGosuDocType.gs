@@ -50,4 +50,8 @@ interface IGosuDocType {
    */
   property get Methods() : List<IGosuDocMethod>
 
+  /**
+   * Relationship lists for this type, superclasses, subclasses etc.
+   */
+  property get Relationships() : List<GosuDocTypeRelationshipList>
 }

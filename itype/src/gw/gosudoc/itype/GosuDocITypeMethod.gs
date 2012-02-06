@@ -22,7 +22,7 @@ internal class GosuDocITypeMethod extends GosuDocITypeFeatureWithParameters impl
 
   construct(owner : GosuDocIType, method : IMethodInfo) {
     super(owner, method.DisplayName, new GosuDocDescription(owner.Scope, method.Description), method.Parameters)
-    _returnType = JavaTypes.pVOID().equals(method.ReturnType)
+    _returnType = JavaTypes.VOID().equals(method.ReturnType)
             ? null : new GosuDocITypeReference(owner.DocSet, method.ReturnType)
     _returnDescription = new GosuDocText(owner.Scope, method.ReturnDescription)
     _uniqueName = method.DisplayName + '(' + ParametersAsString + ")"

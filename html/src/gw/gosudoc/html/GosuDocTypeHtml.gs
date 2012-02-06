@@ -23,6 +23,18 @@ class GosuDocTypeHtml {
     }
   }
 
+  function relationships() : String {
+    if (not _type.Relationships.HasElements) {
+      return ""
+    }
+    var builder = new StringBuilder('<ul class="related">\n')
+    for (r in _type.Relationships) {
+      builder.append(r.Html.generate())
+    }
+    builder.append('</ul>\n')
+    return builder.toString()
+  }
+
   function featureLists() : String {
     return featureList("Constructors", "constructors", _type.Constructors.map( \ c -> c.Html))
             + featureList("Properties", "properties", _type.Properties.map(\ p -> p.Html))

@@ -1,22 +1,29 @@
 /*
   Blue scale, dark -> light
-  #68b3af
-  #87bdb1
-  #aaccb1
-  #c3dbb4
-  #d3e2b6
-  Other Colors:
-  #f0d8d8 mauve
-  #304848 dark gray blue
+  #68b3b3
+  #87bdbd
+  #aacccc
+  #c3dbdb
+  #d3e2e2
 */
 body {
-	font:	normal 12px/20px helvetica,arial,sans-serif;
-	background-color: #d3e2b6;
-  foreground-color: #304848;
+  font:	normal 12px/20px helvetica,arial,sans-serif;
+  background-color: #d3e2e2;
+}
+a {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.type {
+  position: relative;
 }
 .type h1 {
-  border-top: 2px solid #68b3af;
-  background-color: #87bdb1;
+  border-top: 2px solid #68b3bd;
+  background-color: #87bdbd;
   padding: 10px;
   margin: 5px 0px 0px 0px;
 }
@@ -24,14 +31,14 @@ body {
   padding: 5px 5px 5px 10px;
 }
 .featurelist h1 {
-  border-top: 2px solid #68b3af;
-  background-color: #87bdb1;
+  border-top: 2px solid #68b3b3;
+  background-color: #87bdbd;
   padding: 10px;
   margin: 5px 0px 0px 0px;
 }
 .feature .overview {
-  border-top: 1px solid #aaccb1;
-  background-color: c3dbb4;
+  border-top: 1px solid #aacccc;
+  background-color: c3dbdb;
 }
 .feature .overview h2 {
   margin: 0px;
@@ -59,6 +66,55 @@ dd dt {
 pre {
   font-family: "Courier New", Courier, monospace;
   background-color: #ffffff;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
   border-radius: 5px;
+}
+.type .related {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+ul.related {
+  margin: 0px;
+  list-style: none;
+}
+ul.related li {
+  float: left;
+  display: inline;
+  position: relative;
+}
+ul.related li h3 {
+  margin: 0px;
+  padding: 10px;
+  border-top: 2px solid #68b3b3;
+  border-left: 1px solid #d3e2e2;
+}
+ul.related li ul {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  border-left: 1px solid #68b3b3;
+  border-right: 1px solid #68b3b3;
+  border-bottom: 1px solid #68b3b3;
+  margin: 0px;
+  padding: 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+ul.related li ul li {
+  float: none;
+  display: block;
+  margin: 0px;
+  padding: 5px;
+  white-space: nowrap;
+  background-color: #aacccc;
+}
+ul.related li:hover {
+  cursor: hand;
+  cursor: pointer;
+  background-color: #aacccc;
+}
+ul.related li:hover ul {
+  display:block;
 }

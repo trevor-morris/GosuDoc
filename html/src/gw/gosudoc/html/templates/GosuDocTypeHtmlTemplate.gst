@@ -1,4 +1,4 @@
-        <%@ params(type : gw.gosudoc.html.GosuDocTypeHtml) %>
+<%@ params(type : gw.gosudoc.html.GosuDocTypeHtml) %>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -17,6 +17,7 @@
     </div>
     <div class="type">
       <h1><%=type.Title%></h1>
+      <%=type.relationships()%>
       <div class="details">
         <%=type.Summary%> <%=type.Details%>
       </details>
