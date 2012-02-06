@@ -1,0 +1,18 @@
+Not much to say yet. Start of a tool for generating JavaDoc like output for Gosu
+
+ORGANIZATION
+
+Three modules:
+- core: core interfaces and types
+- itype: implementations of core interfaces and types based on Gosu ITypes
+- html: HTML generation based on core interfaces and types
+
+There's a rudimentary Main.gsp, currently just for testing
+
+One possibly confusing bit of design; in the html module all the core types are enhanced with companion objects via
+a Html property. For example if docSet is an IGosuDocSet (core object) then docSet.Html will return the companion
+object for a doc set, which provides methods for generating Html.
+
+TODO
+
+Lots still to do - see the ToDo.txt file
