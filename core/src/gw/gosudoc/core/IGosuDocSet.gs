@@ -19,6 +19,7 @@ interface IGosuDocSet {
 
   /**
    * Lookup types in the doc set by relative name
+   * @param typeName relative type name, for example just String or IGosuDocSet
    * @return a possibly empty list of IGosuDocType with the given relative name
    */
   function getTypesByRelativeName(typeName : String) : List<IGosuDocType>

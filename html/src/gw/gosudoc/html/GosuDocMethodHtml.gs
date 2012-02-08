@@ -2,6 +2,8 @@ package gw.gosudoc.html
 
 uses gw.gosudoc.core.IGosuDocMethod
 uses java.util.jar.Attributes.Name
+uses gw.util.Pair
+uses java.util.ArrayList
 
 /**
  * Generates HTML for a Gosu method
@@ -20,6 +22,15 @@ class GosuDocMethodHtml extends GosuDocFeatureWithParametersHtml {
             ? SEPARATOR + ": " + _method.ReturnType.Html.generate()
             : ""
     return splitAtSeparatorIfTooLong("function " + _method.Name + ParameterSignaturesWithSeparator + returnType)
+  }
+
+  override property get Definitions(): List<Pair<String,String>> {
+    var list = new ArrayList<Pair<String,String>>()
+    list.addAll(super.Definitions)
+    if (not _method.ReturnDescription.IsEmpty) {
+      list.add(Pair.make("Returns", _method.ReturnDescription.Html.generate()))
+    }
+    return list
   }
 
 }
