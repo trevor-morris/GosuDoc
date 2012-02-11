@@ -3,7 +3,7 @@ package gw.gosudoc.core
 /**
  * Represents relationships a type can have with other types.
  */
-enum GosuDocTypeRelationship {
+enum GosuDocRelationshipType {
   SUPERTYPES("Supertypes"), INTERFACES("Interfaces"), SUBTYPES("Known subtypes"), ENHANCEMENTS("Enhancements");
 
   var _label : String as readonly Label

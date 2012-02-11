@@ -3,17 +3,17 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title><%=type.Title%></title>
-    <base href="<%=type.BaseUrl%>"/>
-    <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
-    <link type="text/css" href="css/gosudoc.css" rel="stylesheet" />
-    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
-    <script type="text/javascript" src="js/gosudoc.js"></script>
+    <link type="text/css" href="<%=type.BaseUrl%>css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+    <link type="text/css" href="<%=type.BaseUrl%>css/gosudoc.css" rel="stylesheet" />
+    <script type="text/javascript" src="<%=type.BaseUrl%>js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="<%=type.BaseUrl%>js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="<%=type.BaseUrl%>js/gosudoc.js"></script>
+    <script type="text/javascript">gosuDocBaseUrl = "<%=type.BaseUrl%>"</script>
   </head>
   <body>
     <div id="navbar">
       Goto Class:
-      <input type="text" id="search"/>
+      <input type="text" accesskey="g" id="search"/>
     </div>
     <div class="type">
       <h1><%=type.Title%></h1>

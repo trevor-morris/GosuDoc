@@ -3,6 +3,7 @@
 var gosuTypesByPackage = {<% for (p in packages index i) { %>
   "<%=p.Name%>" : [<%=p.Types.map( \ t -> '"' + t.Name + '"').join(",")%>]<%=(i < packages.Count - 1) ? "," : ""%>
 <% } %>};
+var gosuDocBaseUrl = ""
 function filterGosuTypes(value) {
   var lowerCaseValue = value.toLowerCase();
   var autoCompleteSource = new Array();
@@ -28,7 +29,7 @@ $(document).ready(function() {
       response(filterGosuTypes(request.term));
     },
     select: function(event, ui) {
-      window.location = ui.item.url;
+      window.location = gosuDocBaseUrl + ui.item.url;
     }
   }).data( "autocomplete" )._renderItem = function( ul, item ) {
     return $("<li></li>")

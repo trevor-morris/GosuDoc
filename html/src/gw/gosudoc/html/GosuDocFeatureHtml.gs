@@ -2,7 +2,6 @@ package gw.gosudoc.html
 
 uses gw.gosudoc.core.IGosuDocFeature
 uses gw.gosudoc.html.templates.GosuDocFeatureHtmlTemplate
-uses java.net.URLEncoder
 uses gw.util.Pair
 
 /**
@@ -29,7 +28,7 @@ abstract class GosuDocFeatureHtml {
   }
 
   property get Anchor(): String {
-    return URLEncoder.encode(_feature.UniqueName)
+    return _feature.UniqueName
   }
 
   function generate(): String {

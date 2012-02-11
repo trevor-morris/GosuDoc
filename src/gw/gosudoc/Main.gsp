@@ -1,3 +1,7 @@
+uses gw.lang.enhancements.CoreListEnhancement
+
+uses gw.gosudoc.html.GosuDocHtmlFactory
+
 uses gw.gosudoc.core.IGosuDocProperty
 
 uses gw.gosudoc.core.IGosuDocFeatureWithParameters
@@ -23,7 +27,7 @@ uses gw.gosudoc.html.GosuDocHtmlGenerator
 // TODO just a stub right now, need way to get at all types in a package
 var generator = new GosuDocHtmlGenerator()
 var docSet = new GosuDocITypeSet({
-        IGosuDocGenerator,IGosuDocSet,IGosuDocType,
+        IGosuDocGenerator,IGosuDocSet,IGosuDocType,GosuDocHtmlFactory,CoreListEnhancement,
         IGosuDocFeature,IGosuDocFeatureWithParameters,IGosuDocConstructor,IGosuDocProperty,IGosuDocMethod,
         GosuDocConstructorHtml,GosuDocTag,GosuDocCrossReference
 })

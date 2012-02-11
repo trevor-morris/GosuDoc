@@ -54,11 +54,11 @@ class GosuDocTypeHtml {
   }
 
   property get Title() : String {
-    return _type.Name
+    return _type.Category.Label + " " + _type.Name
   }
 
   property get Url() : String {
-    return Path
+    return BaseUrl + Path
   }
 
   property get Path() : String {

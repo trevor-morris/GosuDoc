@@ -1,7 +1,7 @@
 package gw.gosudoc.html
 
 uses gw.gosudoc.core.IGosuDocType
-uses gw.gosudoc.core.GosuDocTypeRelationshipList
+uses gw.gosudoc.core.GosuDocRelationship
 uses gw.gosudoc.html.templates.GosuDocTypeRelationshipListHtmlTemplate
 
 /**
@@ -9,14 +9,14 @@ uses gw.gosudoc.html.templates.GosuDocTypeRelationshipListHtmlTemplate
  */
 class GosuDocTypeRelationshipListHtml {
 
-  var _list : GosuDocTypeRelationshipList
+  var _list : GosuDocRelationship
 
-  construct(relationshipList: GosuDocTypeRelationshipList) {
+  construct(relationshipList: GosuDocRelationship) {
     _list = relationshipList
   }
 
   property get Label() : String {
-    return _list.Relationship.Label
+    return _list.Type.Label
   }
 
   property get References() : List<GosuDocTypeReferenceHtml> {

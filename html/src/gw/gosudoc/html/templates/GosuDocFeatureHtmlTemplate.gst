@@ -1,4 +1,5 @@
 <%@ params(feature : gw.gosudoc.html.GosuDocFeatureHtml) %>
+<a name="<%=feature.Anchor%>"><!----></a>
 <div class="feature">
   <div class="overview">
     <h2><%=feature.Overview%></h2>

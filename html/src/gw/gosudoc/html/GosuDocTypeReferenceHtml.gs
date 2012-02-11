@@ -20,7 +20,7 @@ class GosuDocTypeReferenceHtml {
     }
 
     override function formatGosuDocTypeName(type: IGosuDocType): String {
-      return '<a href="${type.Html.Path}">${type.Name}</a>'
+      return '<a href="${type.Html.Url}">${type.Name}</a>'
     }
   }
 

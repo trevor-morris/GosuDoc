@@ -17,7 +17,8 @@ uses gw.gosudoc.core.IGosuDocTypeNameFormatter
 uses java.util.Date
 uses java.util.ArrayList
 uses java.lang.Integer
-uses gw.gosudoc.core.GosuDocTypeRelationshipList
+uses gw.gosudoc.core.GosuDocRelationship
+uses gw.gosudoc.core.GosuDocRelationship
 
 class GosuDocITypeReferenceTest extends TestCase {
 
@@ -141,7 +142,7 @@ class GosuDocITypeReferenceTest extends TestCase {
       return {}
     }
 
-    override property get Relationships(): List<GosuDocTypeRelationshipList> {
+    override property get Relationships(): List<GosuDocRelationship> {
       return null
     }
   }

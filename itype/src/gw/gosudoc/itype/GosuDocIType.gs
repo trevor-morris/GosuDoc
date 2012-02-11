@@ -12,10 +12,10 @@ uses gw.gosudoc.core.IGosuDocDescription
 uses java.lang.Comparable
 uses gw.gosudoc.core.GosuDocScope
 uses gw.gosudoc.core.GosuDocDescription
-uses gw.gosudoc.core.GosuDocTypeRelationshipList
+uses gw.gosudoc.core.GosuDocRelationship
 uses java.util.ArrayList
 uses gw.lang.reflect.java.JavaTypes
-uses gw.gosudoc.core.GosuDocTypeRelationship
+uses gw.gosudoc.core.GosuDocRelationshipType
 uses gw.gosudoc.core.IGosuDocTypeReference
 uses gw.lang.reflect.gs.IGosuObject
 uses gw.internal.gosu.parser.GosuClass
@@ -34,7 +34,7 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
   var _constructors : List<GosuDocITypeConstructor> as readonly Constructors
   var _properties : List<GosuDocITypeProperty> as readonly Properties
   var _methods : List<GosuDocITypeMethod> as readonly Methods
-  var _relationships : List<GosuDocTypeRelationshipList> as Relationships
+  var _relationships : List<GosuDocRelationship> as Relationships
 
   static function createFromIType(docSet : GosuDocITypeSet, type : IType) : List<GosuDocIType> {
     return {new GosuDocIType (docSet, type)}
@@ -94,7 +94,7 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
     return iType.Name.substring(0, iType.Name.length - (iType.RelativeName.length + 1))
   }
 
-  private function findRelationships(iType: IType) : List<GosuDocTypeRelationshipList> {
+  private function findRelationships(iType: IType) : List<GosuDocRelationship> {
     return {
       findSupertypes(iType),
       findInterfaces(iType)
@@ -102,21 +102,21 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
     }.where( \ r -> r.Members.HasElements).freeze()
   }
 
-  private function findSupertypes(iType: IType) : GosuDocTypeRelationshipList {
+  private function findSupertypes(iType: IType) : GosuDocRelationship {
     var supertypeList = new ArrayList<IGosuDocTypeReference>()
     var t = iType
     while (t.Supertype != JavaTypes.OBJECT() and t.Supertype != null) {
       supertypeList.add(new GosuDocITypeReference(_docSet, t.Supertype))
       t = t.Supertype
     }
-    return new GosuDocTypeRelationshipList(SUPERTYPES, supertypeList)
+    return new GosuDocRelationship (SUPERTYPES, supertypeList)
   }
 
-  private function findInterfaces(iType: IType) : GosuDocTypeRelationshipList {
+  private function findInterfaces(iType: IType) : GosuDocRelationship {
     // TODO figure out what exactly is in iType.Interfaces ane where IGosuObject comes from
     var interfaceList = iType.Interfaces
             .where(\ i -> i.Name != "_proxy_.gw.lang.reflect.gs.IGosuObject")
             .map(\ i -> new GosuDocITypeReference(_docSet, i))
-    return new GosuDocTypeRelationshipList(INTERFACES, interfaceList)
+    return new GosuDocRelationship (INTERFACES, interfaceList)
   }
 }

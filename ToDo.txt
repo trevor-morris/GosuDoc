@@ -1,6 +1,5 @@
 - Add other related types (enhancements, implementations, subclasses, @see etc.)
 - Need way to find all ITypes in a package (including enhancements)
-- Add anchors for features
 - Handle other tags
 - Handle nested classes
 - Generics handling; what does it mean for file names, links?
@@ -9,6 +8,7 @@
 - Add modifiers (static, public etc. - enum and enum set?)
 - How is deprecated handled by IType?
 - Subtypes; make sure right methods show up, display super type chain
+- IntelliJ style camel case name completion (convert to regexp?)
 - InheritDoc
 
 See also inline TODO tags in project

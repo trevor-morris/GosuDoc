@@ -53,5 +53,5 @@ interface IGosuDocType {
   /**
    * Relationship lists for this type, superclasses, subclasses etc.
    */
-  property get Relationships() : List<GosuDocTypeRelationshipList>
+  property get Relationships() : List<GosuDocRelationship>
 }
