@@ -2,8 +2,10 @@
 - Need way to find all ITypes in a package (including enhancements)
 - Handle other tags
 - Handle nested classes
+- See if can use styles etc. from http://twitter.github.com/bootstrap/
 - Generics handling; what does it mean for file names, links?
-- Move search box to top right, add breadcrumb top left (all/package/type)
+- Move search box to top right, add breadcrumb top left (all/package/type).
+- Add feature level search within the page
 - Package page, lists all types in package
 - Add modifiers (static, public etc. - enum and enum set?)
 - How is deprecated handled by IType?

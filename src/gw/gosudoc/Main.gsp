@@ -1,34 +1,14 @@
-uses gw.lang.enhancements.CoreListEnhancement
-
-uses gw.gosudoc.html.GosuDocHtmlFactory
-
-uses gw.gosudoc.core.IGosuDocProperty
-
-uses gw.gosudoc.core.IGosuDocFeatureWithParameters
-
-uses gw.gosudoc.core.IGosuDocMethod
-
-uses gw.gosudoc.core.IGosuDocFeature
-
-uses gw.gosudoc.core.GosuDocCrossReference
-
-uses gw.gosudoc.core.GosuDocTag
-
+uses gw.lang.cli.CommandLineAccess
 uses gw.gosudoc.itype.GosuDocITypeSet
-
-uses gw.gosudoc.core.IGosuDocSet
-uses gw.gosudoc.core.IGosuDocType
-uses gw.gosudoc.core.IGosuDocConstructor
-uses gw.gosudoc.core.IGosuDocGenerator
-
-uses gw.gosudoc.html.GosuDocConstructorHtml
 uses gw.gosudoc.html.GosuDocHtmlGenerator
 
-// TODO just a stub right now, need way to get at all types in a package
+CommandLineAccess.initialize(Args)
+
+if (Args.SourceDirectoryList.Empty and Args.PackageList.Empty) {
+  print("Please specify at least one of -sources <sourcedirs> or -packages <packagenames>")
+  return
+}
+
 var generator = new GosuDocHtmlGenerator()
-var docSet = new GosuDocITypeSet({
-        IGosuDocGenerator,IGosuDocSet,IGosuDocType,GosuDocHtmlFactory,CoreListEnhancement,
-        IGosuDocFeature,IGosuDocFeatureWithParameters,IGosuDocConstructor,IGosuDocProperty,IGosuDocMethod,
-        GosuDocConstructorHtml,GosuDocTag,GosuDocCrossReference
-})
-generator.generateGosuDoc(docSet, new java.io.File("c:/Users/Trevor/tmp"))
+var docSet = GosuDocITypeSet.create(Args.SourceDirectoryList, Args.PackageList)
+generator.generateGosuDoc(docSet, new java.io.File(Args.Output))

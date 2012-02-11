@@ -34,7 +34,7 @@ class GosuDocTextHtml {
   private function formatInlineTag(tag : GosuDocTag) : String {
     switch (tag.Name) {
     case "link":
-      return "<code>" + formatCrossReference(tag.parseCrossReference()) + "<code>"
+      return "<code>" + formatCrossReference(tag.parseCrossReference()) + "</code>"
     case "linkplain":
       return formatCrossReference(tag.parseCrossReference())
     default:
