@@ -19,8 +19,10 @@ internal class GosuDocITypeParameter implements IGosuDocParameter {
   construct(owner : GosuDocITypeFeature, param : IParameterInfo) {
     _owningFeature = owner
     _parameterInfo = param
-    _type = new GosuDocITypeReference (owner.OwnerType.DocSet, param.FeatureType)
-    _description = new GosuDocText(owner.OwnerType.Scope, param.Description)
+    // TODO figure out why this cast is necessary
+    var ownerType = owner.OwnerType as GosuDocIType
+    _type = new GosuDocITypeReference (ownerType.DocSet, param.FeatureType)
+    _description = new GosuDocText(ownerType.Scope, param.Description)
   }
 
   override property get Name(): String {

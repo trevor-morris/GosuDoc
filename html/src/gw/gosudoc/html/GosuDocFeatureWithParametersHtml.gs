@@ -34,7 +34,7 @@ abstract class GosuDocFeatureWithParametersHtml extends GosuDocFeatureHtml {
       }
       builder.append(p.Name)
       builder.append(" : ")
-      builder.append(p.Type.Html.generate())
+      builder.append(p.Type.Html.generate(FeatureWithParameters.OwnerType.Html.BaseUrl))
     }
     builder.append(")")
     return builder.toString()

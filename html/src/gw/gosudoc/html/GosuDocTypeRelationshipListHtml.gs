@@ -23,7 +23,7 @@ class GosuDocTypeRelationshipListHtml {
     return _list.Members.map(\ r -> r.Html)
   }
 
-  function generate() : String {
-    return GosuDocTypeRelationshipListHtmlTemplate.renderToString(this)
+  function generate(baseUrl: String) : String {
+    return GosuDocTypeRelationshipListHtmlTemplate.renderToString(this, baseUrl)
   }
 }

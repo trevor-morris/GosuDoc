@@ -16,7 +16,8 @@ class GosuDocPropertyHtml extends GosuDocFeatureHtml {
   }
 
   override property get Signature() : String {
-    return "property get${_property.IsWritable ? '/set' : ''} ${_property.Name}() : ${_property.ValueType.Html.generate()}"
+
+    return "property get${_property.IsWritable ? '/set' : ''} ${_property.Name}() : ${_property.ValueType.Html.generate(_property.OwnerType.Html.BaseUrl)}"
   }
 
   override property get Definitions(): List<Pair<String,String>> {

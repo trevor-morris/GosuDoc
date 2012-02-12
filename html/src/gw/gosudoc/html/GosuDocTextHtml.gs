@@ -45,7 +45,8 @@ class GosuDocTextHtml {
   private function formatCrossReference(crossReference : GosuDocCrossReference) : String {
     var link : String = null
     if (crossReference.Type != null) {
-      link = crossReference.Type.Html.Url
+      var baseUrl = _text.Scope.Type != null ? _text.Scope.Type.Html.BaseUrl : _text.Scope.Package.Html.BaseUrl
+      link = crossReference.Type.Html.url(baseUrl)
       if (crossReference.Feature != null) {
         link = link + "#" + crossReference.Feature.Html.Anchor
       }

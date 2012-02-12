@@ -6,6 +6,11 @@ package gw.gosudoc.core
 interface IGosuDocFeature {
 
   /**
+   * The type that owns this feature
+   */
+  property get OwnerType() : IGosuDocType
+
+  /**
    * The name of the feature; for properties and methods this is the property/method name, for constructors it is
    * just "construct"
    */

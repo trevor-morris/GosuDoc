@@ -29,7 +29,7 @@ class GosuDocTypeHtml {
     }
     var builder = new StringBuilder('<ul class="related">\n')
     for (r in _type.Relationships) {
-      builder.append(r.Html.generate())
+      builder.append(r.Html.generate(_type.Html.BaseUrl))
     }
     builder.append('</ul>\n')
     return builder.toString()
@@ -57,8 +57,8 @@ class GosuDocTypeHtml {
     return _type.Category.Label + " " + _type.Name
   }
 
-  property get Url() : String {
-    return BaseUrl + Path
+  function url(baseUrl: String) : String {
+    return baseUrl + Path
   }
 
   property get Path() : String {

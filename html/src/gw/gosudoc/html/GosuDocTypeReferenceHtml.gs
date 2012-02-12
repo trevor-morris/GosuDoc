@@ -9,28 +9,27 @@ uses gw.gosudoc.core.IGosuDocTypeReference
  */
 class GosuDocTypeReferenceHtml {
 
-  final static var FORMATTER = new IGosuDocTypeNameFormatter() {
-
-    override property get IncludeBlockParameterNames(): boolean {
-      return true
-    }
-
-    override function formatTypeName(fullName: String, relativeName: String): String {
-      return fullName
-    }
-
-    override function formatGosuDocTypeName(type: IGosuDocType): String {
-      return '<a href="${type.Html.Url}">${type.Name}</a>'
-    }
-  }
-
   var _ref : IGosuDocTypeReference
 
   construct(ref : IGosuDocTypeReference) {
     _ref = ref
   }
 
-  function generate() : String {
-    return _ref.formatFullName(FORMATTER)
+  function generate(baseUrl: String) : String {
+    return _ref.formatFullName(new IGosuDocTypeNameFormatter() {
+
+      override property get IncludeBlockParameterNames(): boolean {
+        return true
+      }
+
+      override function formatTypeName(fullName: String, relativeName: String): String {
+        return fullName
+      }
+
+      override function formatGosuDocTypeName(type: IGosuDocType): String {
+        return '<a href="${type.Html.url(baseUrl)}">${type.Name}</a>'
+      }
+    }
+)
   }
 }
