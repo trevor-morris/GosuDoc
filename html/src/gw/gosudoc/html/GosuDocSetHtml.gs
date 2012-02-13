@@ -41,12 +41,12 @@ class GosuDocSetHtml {
 
   private property get ResourceRoot(): IDirectory {
     // TODO must be a better way than this?
-    var gosuDocCss = (typeof this).TypeLoader.Module.FileRepository.findFirstFile("gw/gosudoc/html/resources/css/gosudoc.css")
+    var gosuDocCss = (typeof this).TypeLoader.Module.FileRepository.findFirstFile("gw/gosudoc/html/resources/style/gosudoc.css")
     return gosuDocCss.Parent.Parent
   }
 
   private function createJavaScript(dir : File) {
-    using (var writer = dir.writeToChild("js/gosudoc.js")) {
+    using (var writer = dir.writeToChild("script/gosudoc.js")) {
       GosuDocJavaScriptTemplate.render(writer, _docSet)
     }
   }
