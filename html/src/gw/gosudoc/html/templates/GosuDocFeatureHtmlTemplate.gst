@@ -2,10 +2,10 @@
 <a name="<%=feature.Anchor%>"><!----></a>
 <div class="feature">
   <div class="overview">
-    <h2><%=feature.Overview%></h2>
+    <h3><%=feature.Overview%></h3>
   </div>
   <div class="details">
-    <pre>
+    <pre class="prettyprint">
 <%=feature.Signature%>
 </pre>
     <div>

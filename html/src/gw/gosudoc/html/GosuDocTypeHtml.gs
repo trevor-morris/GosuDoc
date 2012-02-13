@@ -4,6 +4,7 @@ uses java.io.File
 uses java.lang.StringBuilder
 uses gw.gosudoc.core.IGosuDocType
 uses gw.gosudoc.html.templates.GosuDocTypeHtmlTemplate
+uses gw.gosudoc.html.templates.GosuDocFeatureListHtmlTemplate
 
 /**
  * Generates HTML for a Gosu type
@@ -23,34 +24,27 @@ class GosuDocTypeHtml {
     }
   }
 
-  function relationships() : String {
-    if (not _type.Relationships.HasElements) {
-      return ""
-    }
-    var builder = new StringBuilder('<ul class="related">\n')
-    for (r in _type.Relationships) {
-      builder.append(r.Html.generate(_type.Html.BaseUrl))
-    }
-    builder.append('</ul>\n')
-    return builder.toString()
+  property get Relationships() : List<GosuDocRelationshipHtml> {
+    return _type.Relationships.map( \ r -> r.Html)
   }
 
+  property get HasConstructors() : boolean { return _type.Constructors.HasElements }
+
+  property get HasProperties() : boolean { return _type.Properties.HasElements }
+
+  property get HasMethods() : boolean { return _type.Methods.HasElements }
+
   function featureLists() : String {
-    return featureList("Constructors", "constructors", _type.Constructors.map( \ c -> c.Html))
-            + featureList("Properties", "properties", _type.Properties.map(\ p -> p.Html))
-            + featureList("Methods", "methods", _type.Methods.map(\ m -> m.Html))
+    return featureList("Constructors", "..constructors", _type.Constructors.map( \ c -> c.Html))
+            + featureList("Properties", "..properties", _type.Properties.map(\ p -> p.Html))
+            + featureList("Methods", "..methods", _type.Methods.map(\ m -> m.Html))
   }
 
   function featureList(listTitle : String, id : String, features : List<GosuDocFeatureHtml>) : String {
     if (features.Empty) {
       return ""
     }
-    var builder = new StringBuilder('<div id="${id}" class="featurelist">\n<h1>${listTitle}</h1>\n')
-    for (feature in features) {
-      builder.append(feature.generate())
-    }
-    builder.append('</div>\n')
-    return builder.toString()
+    return GosuDocFeatureListHtmlTemplate.renderToString(listTitle, id, features)
   }
 
   property get Title() : String {

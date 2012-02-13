@@ -40,7 +40,7 @@ $(document).ready(function() {
   $(".feature").each(function() {
     $(this).find(".overview").append($(this).find(".summary").clone());
   });
-  $(".feature .overview h2").click(function() {
+  $(".feature .overview h3").click(function() {
     $(this).next().add($(this).parent().next()).slideToggle('fast');
     return false;
   }).hover(function() {
@@ -48,4 +48,5 @@ $(document).ready(function() {
   }, function() {
     $(this).css('cursor','auto');
   }).parent().next().hide();
+  prettyPrint();
 });

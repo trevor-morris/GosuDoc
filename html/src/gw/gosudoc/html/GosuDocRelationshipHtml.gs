@@ -2,12 +2,11 @@ package gw.gosudoc.html
 
 uses gw.gosudoc.core.IGosuDocType
 uses gw.gosudoc.core.GosuDocRelationship
-uses gw.gosudoc.html.templates.GosuDocTypeRelationshipListHtmlTemplate
 
 /**
- * Generates HTML for a type relationship list
+ * Generates HTML for a relationship list
  */
-class GosuDocTypeRelationshipListHtml {
+class GosuDocRelationshipHtml {
 
   var _list : GosuDocRelationship
 
@@ -23,7 +22,4 @@ class GosuDocTypeRelationshipListHtml {
     return _list.Members.map(\ r -> r.Html)
   }
 
-  function generate(baseUrl: String) : String {
-    return GosuDocTypeRelationshipListHtmlTemplate.renderToString(this, baseUrl)
-  }
 }
