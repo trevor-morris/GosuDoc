@@ -7,11 +7,15 @@ Three modules:
 - itype: implementations of core interfaces and types based on Gosu ITypes
 - html: HTML generation based on core interfaces and types
 
-There's a rudimentary Main.gsp, currently just for testing
+One possibly confusing bit of design; in the html module all the core types are enhanced with companion objects via a Html property. For example if docSet is an IGosuDocSet (core object) then docSet.Html will return the companion object for a doc set, which provides methods for generating Html.
 
-One possibly confusing bit of design; in the html module all the core types are enhanced with companion objects via
-a Html property. For example if docSet is an IGosuDocSet (core object) then docSet.Html will return the companion
-object for a doc set, which provides methods for generating Html.
+RUNNING GOSUDOC
+
+There's a Main.gsp:
+
+Main -sources <sourcedirs> -packages <packages> -output <outputdir>
+
+Source directories and packages are comma separated.
 
 TODO
 

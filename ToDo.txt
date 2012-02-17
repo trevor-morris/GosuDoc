@@ -1,15 +1,16 @@
+- Add type level toolbar: expand/shrink all, (existing) buttons + in type search
 - Add other related types (enhancements, implementations, subclasses, @see etc.)
-- Need way to find all ITypes in a package (including enhancements)
+- Figure out problem with displaying core list enhancement details
 - Handle other tags
 - Handle nested classes
 - Generics handling; what does it mean for file names, links?
-- Move search box to top right, add breadcrumb top left (all/package/type).
 - Add feature level search within the page
 - Package page, lists all types in package
-- Add modifiers (static, public etc. - enum and enum set?)
+- Add modifiers (static, public etc. - use enum and enum set?)
 - How is deprecated handled by IType?
 - Subtypes; make sure right methods show up, display super type chain
 - IntelliJ style camel case name completion (convert to regexp?)
 - InheritDoc
+- Revisit code for loading source directories/packages; is there a better way?
 
 See also inline TODO tags in project
