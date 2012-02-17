@@ -29,7 +29,7 @@
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
             </ul>
-            <form class="navbar-search pull-right" action="">
+            <form class="navbar-search pull-left" action="">
               <input type="text" accesskey="g" id="search" class="search-query span2" placeholder="Goto Class">
             </form>
           </div><!--/.nav-collapse -->
@@ -41,13 +41,13 @@
       <h1><%=type.Title%></h1>
       <div class="btn-toolbar">
         <div class="btn-group">
-<%for (l in type.FeatureLists) {%>          <a class="btn" href="#<%=l.Anchor%>"><%=l.Title%></a><%}%>
-<%for (r in type.Relationships) {%>          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+<% for (l in type.FeatureLists) {%>          <a class="btn" href="#<%=l.Anchor%>"><%=l.Title%></a><%}%>
+<% for (r in type.Relationships) {%>          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
             <%=r.Label%>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-<%for (ref in r.References) {%>            <li><%=ref.generate(type.BaseUrl)%></li><%}%>
+<% for (ref in r.References) {%>            <li><%=ref.generate(type.BaseUrl)%></li><%}%>
           </ul><%}%>
         </div>
       </div>
@@ -56,10 +56,28 @@
           <%=type.Summary%> <%=type.Details%>
         </div>
       </div>
-<%for (l in type.FeatureLists) {%>      <a name="<%=l.Anchor%>"><h2><%=l.Title%></h2></a>
+<% for (l in type.FeatureLists) {%>      <a name="<%=l.Anchor%>"><h2><%=l.Title%></h2></a>
       <table class="table table-striped table-bordered">
         <tbody>
-<% for (f in l.Features) {%>          <tr><td><%=f.generate()%></td></tr><%}%>
+<% for (f in l.Features) {%>          <tr><td>
+            <a name="<%=f.Anchor%>"><!----></a>
+            <div class="feature">
+              <div class="overview">
+                <h3><%=f.Overview%></h3>
+              </div>
+              <div class="details">
+                <pre class="prettyprint">
+            <%=f.Signature%>
+            </pre>
+                <div>
+                  <span class="summary"><%=f.Summary%></span><%=f.Details%>
+                </div>
+<% var defs = f.Definitions; if (defs.HasElements) {%>                <dl>
+<% for (d in defs) {%>                  <dt><%=d.First%></dt><dd><%=d.Second%></dd><%}%>
+                </dl><%}%>
+              </div>
+            </div>
+          </td></tr><%}%>
         </tbody>
       </table><%}%>
     </div>

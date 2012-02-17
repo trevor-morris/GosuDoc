@@ -1,7 +1,6 @@
 package gw.gosudoc.html
 
 uses gw.gosudoc.core.IGosuDocFeature
-uses gw.gosudoc.html.templates.GosuDocFeatureHtmlTemplate
 uses gw.util.Pair
 
 /**
@@ -29,10 +28,6 @@ abstract class GosuDocFeatureHtml {
 
   property get Anchor(): String {
     return _feature.UniqueName
-  }
-
-  function generate(): String {
-    return GosuDocFeatureHtmlTemplate.renderToString(this)
   }
 
   abstract property get Signature(): String
