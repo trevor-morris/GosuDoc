@@ -1,20 +1,24 @@
 package gw.gosudoc.html
 
 uses java.io.File
-uses java.lang.StringBuilder
 uses gw.gosudoc.core.IGosuDocType
 uses gw.gosudoc.html.templates.GosuDocTypeHtmlTemplate
-uses gw.gosudoc.html.templates.GosuDocFeatureListHtmlTemplate
 
 /**
  * Generates HTML for a Gosu type
  */
 class GosuDocTypeHtml {
 
-  var _type : IGosuDocType
+  var _type: IGosuDocType
+  var _featureLists: List<GosuDocFeatureListHtml> as readonly FeatureLists
 
   construct(type : IGosuDocType) {
     _type = type
+    _featureLists = {
+      new GosuDocFeatureListHtml("Constructors", type.Constructors.map(\ c -> c.Html)),
+      new GosuDocFeatureListHtml("Properties", type.Properties.map(\ p -> p.Html)),
+      new GosuDocFeatureListHtml("Methods", type.Methods.map(\m -> m.Html))
+    }.where(\ featureList -> featureList.Features.HasElements).freeze()
   }
 
   function generateHtml(dir : File) {
@@ -26,25 +30,6 @@ class GosuDocTypeHtml {
 
   property get Relationships() : List<GosuDocRelationshipHtml> {
     return _type.Relationships.map( \ r -> r.Html)
-  }
-
-  property get HasConstructors() : boolean { return _type.Constructors.HasElements }
-
-  property get HasProperties() : boolean { return _type.Properties.HasElements }
-
-  property get HasMethods() : boolean { return _type.Methods.HasElements }
-
-  function featureLists() : String {
-    return featureList("Constructors", "..constructors", _type.Constructors.map( \ c -> c.Html))
-            + featureList("Properties", "..properties", _type.Properties.map(\ p -> p.Html))
-            + featureList("Methods", "..methods", _type.Methods.map(\ m -> m.Html))
-  }
-
-  function featureList(listTitle : String, id : String, features : List<GosuDocFeatureHtml>) : String {
-    if (features.Empty) {
-      return ""
-    }
-    return GosuDocFeatureListHtmlTemplate.renderToString(listTitle, id, features)
   }
 
   property get Title() : String {

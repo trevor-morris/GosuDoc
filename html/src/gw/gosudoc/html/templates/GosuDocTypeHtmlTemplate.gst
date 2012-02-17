@@ -41,9 +41,7 @@
       <h1><%=type.Title%></h1>
       <div class="btn-toolbar">
         <div class="btn-group">
-<%if (type.HasConstructors) {%>          <a class="btn" href="#..constructors">Constructors</a><%}%>
-<%if (type.HasProperties) {%>          <a class="btn" href="#..properties">Properties</a><%}%>
-<%if (type.HasMethods) {%>          <a class="btn" href="#..methods">Methods</a><%}%>
+<%for (l in type.FeatureLists) {%>          <a class="btn" href="#<%=l.Anchor%>"><%=l.Title%></a><%}%>
 <%for (r in type.Relationships) {%>          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
             <%=r.Label%>
             <span class="caret"></span>
@@ -58,7 +56,12 @@
           <%=type.Summary%> <%=type.Details%>
         </div>
       </div>
-      <%=type.featureLists()%>
+<%for (l in type.FeatureLists) {%>      <a name="<%=l.Anchor%>"><h2><%=l.Title%></h2></a>
+      <table class="table table-striped table-bordered">
+        <tbody>
+<% for (f in l.Features) {%>          <tr><td><%=f.generate()%></td></tr><%}%>
+        </tbody>
+      </table><%}%>
     </div>
   </body>
 </html>
