@@ -10,8 +10,8 @@
     <link type="text/css" href="<%=type.BaseUrl%>style/gosudoc.css" rel="stylesheet" />
     <script type="text/javascript" src="<%=type.BaseUrl%>script/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="<%=type.BaseUrl%>script/jquery-ui-1.8.16.custom.min.js"></script>
-    <script type="text/javascript" src="<%=type.BaseUrl%>script/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=type.BaseUrl%>script/prettify.js"></script>
+    <script type="text/javascript" src="<%=type.BaseUrl%>script/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=type.BaseUrl%>script/gosudoc.js"></script>
     <script type="text/javascript">gosuDocBaseUrl = "<%=type.BaseUrl%>"</script>
   </head>
@@ -66,12 +66,8 @@
                 <h3><%=f.Overview%></h3>
               </div>
               <div class="details">
-                <pre class="prettyprint">
-            <%=f.Signature%>
-            </pre>
-                <div>
-                  <span class="summary"><%=f.Summary%></span><%=f.Details%>
-                </div>
+                <pre class="prettyprint"><%=f.Signature%></pre>
+                <div><%if (not f.Summary.Empty) {%><span class="summary"><%=f.Summary%></span><%}%><%=f.Details%></div>
 <% var defs = f.Definitions; if (defs.HasElements) {%>                <dl>
 <% for (d in defs) {%>                  <dt><%=d.First%></dt><dd><%=d.Second%></dd><%}%>
                 </dl><%}%>

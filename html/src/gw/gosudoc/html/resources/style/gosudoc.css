@@ -1,6 +1,10 @@
 body {
   padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
+pre.prettyprint {
+  margin: 5px;
+  padding: 3px 10px 3px 10px;
+}
 dt {
   font-weight: bold;
 }

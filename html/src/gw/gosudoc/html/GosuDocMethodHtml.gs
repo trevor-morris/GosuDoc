@@ -19,7 +19,7 @@ class GosuDocMethodHtml extends GosuDocFeatureWithParametersHtml {
 
   override property get Signature() : String {
     var returnType = _method.ReturnType != null
-            ? SEPARATOR + ": " + _method.ReturnType.Html.generate(_method.OwnerType.Html.BaseUrl)
+            ? LINE_BREAK + " : " + _method.ReturnType.Html.generate(_method.OwnerType.Html.BaseUrl)
             : ""
     return splitAtSeparatorIfTooLong("function " + _method.Name + ParameterSignaturesWithSeparator + returnType)
   }

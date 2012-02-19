@@ -38,10 +38,19 @@ $(document).ready(function() {
       .appendTo( ul );
     };
   $(".feature").each(function() {
-    $(this).find(".overview").append($(this).find(".summary").clone());
+    var summary = $(this).find(".summary")
+    if (summary.length) {
+      $(this).find(".overview").append(summary.clone());
+    }
   });
   $(".feature .overview h3").click(function() {
-    $(this).next().add($(this).parent().next()).slideToggle('fast');
+    var details = $(this).parent().next()
+    var summary = $(this).next()
+    if (summary.length) {
+      details.add(summary).slideToggle('fast');
+    } else {
+      details.slideToggle('fast');
+    }
     return false;
   }).hover(function() {
     $(this).css('cursor','pointer');

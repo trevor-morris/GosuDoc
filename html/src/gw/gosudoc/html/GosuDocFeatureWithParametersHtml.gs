@@ -3,6 +3,7 @@ package gw.gosudoc.html
 uses gw.gosudoc.core.IGosuDocFeatureWithParameters
 uses java.lang.StringBuilder
 uses gw.util.Pair
+uses java.util.regex.Pattern
 
 /**
  * Superclass for classes that generate HTML for a Gosu constructor, property or method
@@ -10,7 +11,8 @@ uses gw.util.Pair
 abstract class GosuDocFeatureWithParametersHtml extends GosuDocFeatureHtml {
 
   static final var MAX_SIGNATURE_LENGTH = 120
-  protected static final var SEPARATOR : String = "\n"
+  protected static final var LINE_BREAK : String = "\n"
+  static final var LINE_BREAK_PATTERN = Pattern.compile(LINE_BREAK + "\\s*", Pattern.MULTILINE)
 
   construct(gosuDocFeature : IGosuDocFeatureWithParameters) {
     super(gosuDocFeature)
@@ -18,19 +20,18 @@ abstract class GosuDocFeatureWithParametersHtml extends GosuDocFeatureHtml {
 
   protected function splitAtSeparatorIfTooLong(line : String) : String {
     if (lengthIgnoringTags(line) > MAX_SIGNATURE_LENGTH) {
-      return line.replace(SEPARATOR, "\n    ")
+      return LINE_BREAK_PATTERN.matcher(line).replaceAll("\n    ")
     } else {
-      return line.replace(SEPARATOR, " ")
+      return line.replace(LINE_BREAK, "")
     }
   }
 
   protected property get ParameterSignaturesWithSeparator() : String {
     var builder = new StringBuilder()
-    builder.append("(")
+    builder.append("(").append(LINE_BREAK)
     for (p in FeatureWithParameters.Parameters index i) {
       if (i != 0) {
-        builder.append(",")
-        builder.append(SEPARATOR)
+        builder.append(",").append(LINE_BREAK).append(" ")
       }
       builder.append(p.Name)
       builder.append(" : ")
@@ -57,7 +58,7 @@ abstract class GosuDocFeatureWithParametersHtml extends GosuDocFeatureHtml {
       if (ch == '<') {
         inTag = true
       }
-      if (not inTag) {
+      if (not inTag and ch != LINE_BREAK) {
         count++
       }
       if (inTag and ch == '>') {
