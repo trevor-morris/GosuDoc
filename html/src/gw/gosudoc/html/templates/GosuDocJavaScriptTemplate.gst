@@ -5,13 +5,13 @@ var gosuTypesByPackage = {<% for (p in packages index i) { %>
 <% } %>};
 var gosuDocBaseUrl = ""
 function filterGosuTypes(value) {
-  var lowerCaseValue = value.toLowerCase();
+  var regExp = convertToRegExp(value);
   var autoCompleteSource = new Array();
   for (var package in gosuTypesByPackage) {
     var types = gosuTypesByPackage[package];
     for (var i in types) {
       var shortName = types[i];
-      if (shortName.toLowerCase().lastIndexOf(lowerCaseValue, 0) == 0) {
+      if (regExp.test(shortName)) {
         var fullName = package + "." + shortName;
         autoCompleteSource[autoCompleteSource.length] = {
           value: fullName, label: shortName, url: "doc/" + package.replace(/\./g, '/') + "/" + shortName + ".html"
@@ -22,6 +22,30 @@ function filterGosuTypes(value) {
   return autoCompleteSource.sort(function(a,b) {
     return a.label < b.label ? -1 : a.label > b.label ? 1 : 0;
   });
+}
+function convertToRegExp(pattern) {
+  var length = pattern.length;
+  var regExp = "^";
+  for (var i = 0; i < length; i++) {
+    var patternChar = pattern.charAt(i);
+    var lower = patternChar.toLowerCase();
+    var upper = patternChar.toUpperCase();
+    var isAlpha = lower != upper;
+    if (isAlpha) {
+      if (i == 0) {
+        regExp += "[" + lower + upper + "]";
+      } else if (lower == patternChar) {
+        regExp += "(.*" + upper + "|" + lower + ")";
+      } else {
+        regExp += ".*" + patternChar;
+      }
+    } else if (patternChar = '*') {
+      regExp += ".*";
+    } else {
+      regExp += "\\" + patternChar;
+    }
+  }
+  return new RegExp(regExp);
 }
 $(document).ready(function() {
   $("#search").autocomplete({

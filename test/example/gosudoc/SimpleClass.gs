@@ -31,5 +31,9 @@ class SimpleClass {
     return true
   }
 
-
+  /**
+   * Method with no return type
+   */
+  function simpleMethodNoReturn() {
+  }
 }

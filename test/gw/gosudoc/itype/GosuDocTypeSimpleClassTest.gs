@@ -46,11 +46,21 @@ class GosuDocTypeSimpleClassTest extends TestCase {
 
   function testSimpleClassMethod() {
     var methods = _simpleClass.Methods
-    assertEquals(1, methods.Count)
-    var method = methods.first()
+    assertEquals(2, methods.Count)
+    var method = methods.firstWhere( \ m -> m.Name == "simpleMethod")
     assertEquals("Simple method with a string argument", method.Description.Summary.RawText)
     assertTrue(method.Description.Details.IsEmpty)
     assertEquals("simpleMethod(String)", method.UniqueName)
+  }
+
+  function testSimpleClassMethodNoReturn() {
+    var methods = _simpleClass.Methods
+    assertEquals(2, methods.Count)
+    var method = methods.firstWhere( \ m -> m.Name == "simpleMethodNoReturn")
+    assertEquals("Method with no return type", method.Description.Summary.RawText)
+    assertTrue(method.Description.Details.IsEmpty)
+    assertEquals("simpleMethodNoReturn()", method.UniqueName)
+    assertNull(method.ReturnType)
   }
 
   function testSimpleClassPackage() {
