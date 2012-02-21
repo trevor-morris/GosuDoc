@@ -9,6 +9,10 @@ uses gw.gosudoc.core.IGosuDocTypeReference
  */
 class GosuDocTypeReferenceHtml {
 
+  static var WELL_KNOWN_PACKAGES = {
+    "java.lang", "java.util"
+  }.map( \ p -> p + ".").freeze()
+
   var _ref : IGosuDocTypeReference
 
   construct(ref : IGosuDocTypeReference) {
@@ -23,6 +27,11 @@ class GosuDocTypeReferenceHtml {
       }
 
       override function formatTypeName(fullName: String, relativeName: String): String {
+        for (prefix in WELL_KNOWN_PACKAGES) {
+          if (fullName.startsWith(prefix)) {
+            return fullName.substring(prefix.length())
+          }
+        }
         return fullName
       }
 
