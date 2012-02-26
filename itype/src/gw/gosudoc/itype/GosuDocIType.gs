@@ -43,7 +43,7 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
   private construct(docSetInit: GosuDocITypeSet, iType : IType) {
     _docSet = docSetInit
     _type = iType
-    _package = docSetInit.getPackageByName(packageName(iType))
+    _package = docSetInit.getPackageForType(iType)
     _scope = new GosuDocScope(_docSet, _package, this)
     _category = findCategory(iType)
     _description = new GosuDocDescription(_scope, iType.TypeInfo.Description)
@@ -88,10 +88,6 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
     return info.Methods.where(\m -> m.Container == info and not m.DisplayName.startsWith("@"))
             .map(\m -> new GosuDocITypeMethod (this, m))
             .sort().freeze()
-  }
-
-  private function packageName(iType : IType) : String {
-    return iType.Name.substring(0, iType.Name.length - (iType.RelativeName.length + 1))
   }
 
   private function findRelationships(iType: IType) : List<GosuDocRelationship> {

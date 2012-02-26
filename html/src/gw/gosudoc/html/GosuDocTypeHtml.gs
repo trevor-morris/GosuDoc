@@ -22,7 +22,6 @@ class GosuDocTypeHtml {
   }
 
   function generateHtml(dir : File) {
-    dir.getChild(_type.Package.Html.Path).ensureDirectoryExists()
     using (var writer = dir.writeToChild(Path)) {
       GosuDocTypeHtmlTemplate.render(writer, this)
     }
@@ -34,6 +33,10 @@ class GosuDocTypeHtml {
 
   property get Title() : String {
     return _type.Category.Label + " " + _type.Name
+  }
+
+  property get LinkFromPackage() : String {
+    return '<a href="./${_type.Name}.html">${_type.Name}</a>'
   }
 
   function url(baseUrl: String) : String {

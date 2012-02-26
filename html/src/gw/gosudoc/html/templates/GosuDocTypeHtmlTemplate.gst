@@ -13,9 +13,10 @@
     <script type="text/javascript" src="<%=type.BaseUrl%>script/prettify.js"></script>
     <script type="text/javascript" src="<%=type.BaseUrl%>script/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=type.BaseUrl%>script/gosudoc.js"></script>
+    <script type="text/javascript" src="<%=type.BaseUrl%>script/gosudoctype.js"></script>
     <script type="text/javascript">gosuDocBaseUrl = "<%=type.BaseUrl%>"</script>
   </head>
-  <body>
+  <body data-spy="scroll" data-target=".subnav" data-offset="50">
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -27,10 +28,13 @@
           <a class="brand" href="#">GosuDoc</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class=""><a href="<%=type.BaseUrl%>doc/index.html">Home</a></li>
+            </ul>
+            <ul class="nav">
+              <li class=""><a href="package.html">Package</a></li>
             </ul>
             <form class="navbar-search pull-left" action="">
-              <input type="text" accesskey="g" id="search" class="search-query span2" placeholder="Goto Class">
+              <input type="text" accesskey="g" id="gotoclass" class="search-query span2" placeholder="Goto Class">
             </form>
           </div><!--/.nav-collapse -->
         </div>
@@ -38,19 +42,20 @@
     </div>
 
     <div class="container">
-      <h1><%=type.Title%></h1>
-      <div class="btn-toolbar">
-        <div class="btn-group">
-<% for (l in type.FeatureLists) {%>          <a class="btn" href="#<%=l.Anchor%>"><%=l.Title%></a><%}%>
-<% for (r in type.Relationships) {%>          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            <%=r.Label%>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-<% for (ref in r.References) {%>            <li><%=ref.generate(type.BaseUrl)%></li><%}%>
-          </ul><%}%>
+      <header class="jumbotron subhead" id="overview">
+        <h1><%=type.Title%></h1>
+        <div class="subnav">
+          <ul class="nav nav-pills">
+<% for (l in type.FeatureLists) {%>              <li><a href="#<%=l.Anchor%>"><%=l.Title%></a></li><%}%>
+<% for (r in type.Relationships) {%>            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%=r.Label%> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+<% for (ref in r.References) {%>                <li><%=ref.generate(type.BaseUrl)%></li><%}%>
+              </ul>
+            </li><%}%>
+          </ul>
         </div>
-      </div>
+      </header>
       <div class="type">
         <div class="details">
           <%=type.Summary%> <%=type.Details%>

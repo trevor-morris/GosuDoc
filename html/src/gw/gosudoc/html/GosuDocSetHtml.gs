@@ -6,7 +6,9 @@ uses java.io.Writer
 uses java.io.FileWriter
 uses gw.fs.IDirectory
 uses gw.gosudoc.core.IGosuDocSet
-uses gw.gosudoc.html.templates.GosuDocJavaScriptTemplate
+uses gw.gosudoc.html.templates.GosuDocGlobalJavaScriptTemplate
+uses gw.gosudoc.html.templates.GosuDocGlobalJavaScriptTemplate
+uses gw.gosudoc.html.templates.GosuDocIndexHtmlTemplate
 
 /**
  * Generate HTML for an IGosuDocSet
@@ -23,7 +25,16 @@ class GosuDocSetHtml {
     dir.ensureDirectoryExists()
     copyResources(dir)
     createJavaScript(dir)
+    createIndexFile(dir)
     createTypeFiles(dir)
+  }
+
+  property get BaseUrl() : String {
+    return "../"
+  }
+
+  property get Packages() : List<GosuDocPackageHtml> {
+    return _docSet.Packages.map(\ p -> p.Html)
   }
 
   private function copyResources(dir : File) {
@@ -47,15 +58,19 @@ class GosuDocSetHtml {
 
   private function createJavaScript(dir : File) {
     using (var writer = dir.writeToChild("script/gosudoc.js")) {
-      GosuDocJavaScriptTemplate.render(writer, _docSet)
+      GosuDocGlobalJavaScriptTemplate.render(writer, _docSet)
+    }
+  }
+
+  private function createIndexFile(dir : File) {
+    using (var writer = dir.writeToChild("doc/index.html")) {
+      GosuDocIndexHtmlTemplate.render(writer, this)
     }
   }
 
   private function createTypeFiles(dir : File) {
-    for (p in _docSet.Packages) {
-      for (t in p.Types) {
-        t.Html.generateHtml(dir)
-      }
+    for (p in Packages) {
+      p.generateHtml(dir)
     }
   }
 

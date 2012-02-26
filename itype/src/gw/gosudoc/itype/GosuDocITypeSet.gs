@@ -61,9 +61,10 @@ class GosuDocITypeSet implements IGosuDocSet, ITypeToGosuDocType {
     }
   }
 
-  function getPackageByName(name : String) : GosuDocITypePackage {
+  function getPackageForType(type : IType) : GosuDocITypePackage {
+    var name = packageName(type)
     if (not _packagesByName.containsKey(name)) {
-      _packagesByName.put(name, new GosuDocITypePackage (name))
+      _packagesByName.put(name, new GosuDocITypePackage(this, name, type))
     }
     return _packagesByName.get(name)
   }
@@ -83,6 +84,10 @@ class GosuDocITypeSet implements IGosuDocSet, ITypeToGosuDocType {
 
   override property get Packages(): List<IGosuDocPackage> {
     return _packagesByName.Values.toList().sort()
+  }
+
+  private function packageName(iType : IType) : String {
+    return iType.Name.substring(0, iType.Name.length - (iType.RelativeName.length + 1))
   }
 
   private static function loadSourceDirectories(sourceDirectories: List<String>) {

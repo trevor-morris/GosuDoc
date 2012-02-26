@@ -47,8 +47,8 @@ function convertToRegExp(pattern) {
   }
   return new RegExp(regExp);
 }
-$(document).ready(function() {
-  $("#search").autocomplete({
+function initializeGoToClass() {
+  $("#gotoclass").autocomplete({
     source: function(request, response) {
       response(filterGosuTypes(request.term));
     },
@@ -60,26 +60,27 @@ $(document).ready(function() {
       .data("item.autocomplete", item)
       .append( "<a>" + item.value + "</a>" )
       .appendTo( ul );
-    };
-  $(".feature").each(function() {
-    var summary = $(this).find(".summary")
-    if (summary.length) {
-      $(this).find(".overview").append(summary.clone());
+  };
+}
+function initializeSubNav() {
+  // Support for sub nav bar, not fully supported Bootstrap feature
+  var $win = $(window)
+    , $nav = $('.subnav')
+    , navTop = $('.subnav').length && $('.subnav').offset().top - 40
+    , isFixed = 0
+
+  processScroll()
+
+  $win.on('scroll', processScroll)
+
+  function processScroll() {
+    var i, scrollTop = $win.scrollTop()
+    if (scrollTop >= navTop && !isFixed) {
+      isFixed = 1
+      $nav.addClass('subnav-fixed')
+    } else if (scrollTop <= navTop && isFixed) {
+      isFixed = 0
+      $nav.removeClass('subnav-fixed')
     }
-  });
-  $(".feature .overview h3").click(function() {
-    var details = $(this).parent().next()
-    var summary = $(this).next()
-    if (summary.length) {
-      details.add(summary).slideToggle('fast');
-    } else {
-      details.slideToggle('fast');
-    }
-    return false;
-  }).hover(function() {
-    $(this).css('cursor','pointer');
-  }, function() {
-    $(this).css('cursor','auto');
-  }).parent().next().hide();
-  prettyPrint();
-});
+  }
+}
