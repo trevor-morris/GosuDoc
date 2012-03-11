@@ -1,5 +1,7 @@
 package gw.gosudoc.core
 
+uses java.util.Set
+
 /**
  * Common information that all GosuDoc feature items (constructors, properties and methods) have in common
  */
@@ -9,6 +11,11 @@ interface IGosuDocFeature {
    * The type that owns this feature
    */
   property get OwnerType() : IGosuDocType
+
+  /**
+   * Modifiers - public, static etc.
+   */
+  property get Modifiers() : Set<GosuDocModifier>
 
   /**
    * The name of the feature; for properties and methods this is the property/method name, for constructors it is

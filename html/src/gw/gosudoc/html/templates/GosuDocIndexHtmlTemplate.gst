@@ -39,15 +39,17 @@
     </div>
 
     <div class="container">
-      <h1>Package Index</h1>
-      <table class="table table-striped table-bordered">
-        <tbody>
-<% for (p in docSet.Packages) {%>          <tr><td>
-              <h3><%=p.LinkFromIndex%></h3>
-              <%=p.Summary%>
-          </td></tr><%}%>
-        </tbody>
-      </table>
+      <section id="...packages">
+        <h1>Package Index</h1>
+        <table class="table table-striped table-bordered">
+          <tbody>
+<% for (p in docSet.Packages) {%>            <tr><td>
+                <h3><%=p.LinkFromIndex%></h3>
+                <%=p.Summary%>
+            </td></tr><%}%>
+          </tbody>
+        </table>
+      </section>
     </div>
   </body>
 </html>

@@ -19,6 +19,8 @@ uses java.util.ArrayList
 uses java.lang.Integer
 uses gw.gosudoc.core.GosuDocRelationship
 uses gw.gosudoc.core.GosuDocRelationship
+uses gw.gosudoc.core.GosuDocModifier
+uses java.util.Set
 
 class GosuDocITypeReferenceTest extends TestCase {
 
@@ -120,6 +122,10 @@ class GosuDocITypeReferenceTest extends TestCase {
 
     override property get Category(): GosuDocTypeCategory {
       return GosuDocTypeCategory.C_CLASS
+    }
+
+    override property get Modifiers(): Set<GosuDocModifier> {
+      return {}
     }
 
     override property get Package(): IGosuDocPackage {

@@ -52,16 +52,19 @@
           <%=p.Summary%> <%=p.Details%>
         </div>
       </div>
-<% for (l in p.TypeLists) {%>      <a name="<%=l.Anchor%>"></a>
-      <h2><%=l.Title%></h2>
-      <table class="table table-striped table-bordered">
-        <tbody>
-<% for (t in l.Types) {%>          <tr><td>
-              <h3><%=t.LinkFromPackage%></h3>
-              <%=t.Summary%>
-          </td></tr><%}%>
-        </tbody>
-      </table><%}%>
+<% for (l in p.TypeLists) {%>      <section id="<%=l.Anchor%>">
+        <h2><%=l.Title%></h2>
+        <table class="table table-striped table-bordered">
+          <tbody>
+<% for (t in l.Types) {%>            <tr><td>
+                <h3><%=t.LinkFromPackage%></h3>
+                <%=t.Summary%>
+            </td></tr>
+<%}%>
+          </tbody>
+        </table>
+      </section>
+<%}%>
     </div>
   </body>
 </html>

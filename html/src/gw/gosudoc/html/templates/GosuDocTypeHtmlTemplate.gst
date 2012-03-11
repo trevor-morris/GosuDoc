@@ -61,26 +61,29 @@
           <%=type.Summary%> <%=type.Details%>
         </div>
       </div>
-<% for (l in type.FeatureLists) {%>      <a name="<%=l.Anchor%>"><h2><%=l.Title%></h2></a>
-      <table class="table table-striped table-bordered">
-        <tbody>
-<% for (f in l.Features) {%>          <tr><td>
-            <a name="<%=f.Anchor%>"><!----></a>
-            <div class="feature">
-              <div class="overview">
-                <h3><%=f.Overview%></h3>
+<% for (l in type.FeatureLists) {%>      <section id="<%=l.Anchor%>">
+        <h2><%=l.Title%></h2>
+        <table class="table table-striped table-bordered">
+          <tbody>
+<% for (f in l.Features) {%>            <tr><td>
+              <div id="<%=f.Anchor%>" class="feature">
+                <div class="overview">
+                  <h3><%=f.Overview%></h3>
+                </div>
+                <div class="details">
+                  <pre class="prettyprint"><%=f.Signature%></pre>
+                  <div><%if (not f.Summary.Empty) {%><span class="summary"><%=f.Summary%></span><%}%><%=f.Details%></div>
+<% var defs = f.Definitions; if (defs.HasElements) {%>                  <dl>
+<% for (d in defs) {%>                    <dt><%=d.First%></dt><dd><%=d.Second%></dd><%}%>
+                  </dl><%}%>
+                </div>
               </div>
-              <div class="details">
-                <pre class="prettyprint"><%=f.Signature%></pre>
-                <div><%if (not f.Summary.Empty) {%><span class="summary"><%=f.Summary%></span><%}%><%=f.Details%></div>
-<% var defs = f.Definitions; if (defs.HasElements) {%>                <dl>
-<% for (d in defs) {%>                  <dt><%=d.First%></dt><dd><%=d.Second%></dd><%}%>
-                </dl><%}%>
-              </div>
-            </div>
-          </td></tr><%}%>
-        </tbody>
-      </table><%}%>
+            </td></tr>
+<%}%>
+          </tbody>
+        </table>
+      </section>
+<%}%>
     </div>
   </body>
 </html>

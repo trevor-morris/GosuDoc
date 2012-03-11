@@ -5,6 +5,7 @@ uses gw.lang.reflect.IConstructorInfo
 uses gw.gosudoc.core.IGosuDocFeatureWithParameters
 uses gw.lang.reflect.IParameterInfo
 uses gw.gosudoc.core.IGosuDocDescription
+uses gw.lang.reflect.IAttributedFeatureInfo
 
 /**
  * Superclass for GosuDoc constructors and methods

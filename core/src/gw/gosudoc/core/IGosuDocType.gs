@@ -3,6 +3,7 @@ package gw.gosudoc.core
 uses gw.lang.reflect.IConstructorInfo
 uses gw.lang.reflect.IMethodInfo
 uses gw.lang.reflect.IPropertyInfo
+uses java.util.Set
 
 /**
  * Represents a class, interface, enum or enhancement for which GosuDoc should be generated
@@ -10,6 +11,11 @@ uses gw.lang.reflect.IPropertyInfo
  * @see IGosuDocType
  */
 interface IGosuDocType {
+
+  /**
+   * Attributes of the type
+   */
+  property get Modifiers() : Set<GosuDocModifier>
 
   /**
    * Category of type - one of Class/Interface/Enum/Enhancement

@@ -14,7 +14,7 @@ class GosuDocConstructorHtml extends GosuDocFeatureWithParametersHtml {
   }
 
   override property get Signature() : String {
-    return splitAtSeparatorIfTooLong("construct" + ParameterSignaturesWithSeparator)
+    return Feature.Modifiers.Signature + splitAtSeparatorIfTooLong("construct" + ParameterSignaturesWithSeparator)
   }
 
 }

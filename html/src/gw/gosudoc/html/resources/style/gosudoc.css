@@ -6,6 +6,9 @@ body {
 h1 {
   margin-bottom: 10px;
 }
+section {
+  padding-top: 40px;
+}
 .type {
   padding: 10px 5px 10px 5px;
 }

@@ -19,6 +19,11 @@ uses gw.gosudoc.core.GosuDocRelationshipType
 uses gw.gosudoc.core.IGosuDocTypeReference
 uses gw.lang.reflect.gs.IGosuObject
 uses gw.internal.gosu.parser.GosuClass
+uses gw.gosudoc.core.GosuDocModifier
+uses java.util.TreeSet
+uses gw.lang.reflect.Modifier
+uses gw.gosudoc.core.GosuDocModifier
+uses java.util.Set
 
 /**
  * IGosuDocType built on IType and ITypeInfo information
@@ -31,6 +36,7 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
   var _scope : GosuDocScope as readonly Scope
   var _description : IGosuDocDescription as readonly Description
   var _category : GosuDocTypeCategory as readonly Category
+  var _modifiers: Set<GosuDocModifier> as readonly Modifiers
   var _constructors : List<GosuDocITypeConstructor> as readonly Constructors
   var _properties : List<GosuDocITypeProperty> as readonly Properties
   var _methods : List<GosuDocITypeMethod> as readonly Methods
@@ -46,6 +52,7 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
     _package = docSetInit.getPackageForType(iType)
     _scope = new GosuDocScope(_docSet, _package, this)
     _category = findCategory(iType)
+    _modifiers = getModifiers(iType.Modifiers)
     _description = new GosuDocDescription(_scope, iType.TypeInfo.Description)
     _constructors = findConstructors(iType.TypeInfo)
     _properties = findProperties(iType.TypeInfo)
@@ -72,6 +79,26 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
     } else {
       return GosuDocTypeCategory.C_CLASS
     }
+  }
+
+  private function getModifiers(modifiers : int) : Set<GosuDocModifier> {
+    var modifierSet = new TreeSet<GosuDocModifier>()
+    if (Modifier.isPrivate(modifiers)) {
+      modifierSet.add(M_PRIVATE)
+    } else if (Modifier.isPublic(modifiers)) {
+      modifierSet.add(M_PUBLIC)
+    } else if (Modifier.isProtected(modifiers)) {
+      modifierSet.add(M_PROTECTED)
+    } else {
+      modifierSet.add(M_INTERNAL)
+    }
+    if (Modifier.isAbstract(modifiers)) {
+      modifierSet.add(M_ABSTRACT)
+    }
+    if (Modifier.isStatic(modifiers)) {
+      modifierSet.add(M_STATIC)
+    }
+    return modifierSet.freeze()
   }
 
   private function findConstructors(info : ITypeInfo) : List<GosuDocITypeConstructor> {
