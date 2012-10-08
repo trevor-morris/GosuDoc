@@ -140,6 +140,7 @@ internal class GosuDocIType implements IGosuDocType, Comparable<GosuDocIType> {
     var interfaceList = iType.Interfaces
             .where(\ i -> i.Name != "_proxy_.gw.lang.reflect.gs.IGosuObject")
             .map(\ i -> new GosuDocITypeReference(_docSet, i))
-    return new GosuDocRelationship (INTERFACES, interfaceList)
+            .toList()
+    return new GosuDocRelationship(INTERFACES, interfaceList)
   }
 }

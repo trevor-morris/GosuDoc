@@ -11,6 +11,7 @@
     <orderEntry type="module" module-name="core" />
     <orderEntry type="module" module-name="html" />
     <orderEntry type="module" module-name="itype" />
+    <orderEntry type="library" scope="TEST" name="junit" level="project" />
   </component>
 </module>
 

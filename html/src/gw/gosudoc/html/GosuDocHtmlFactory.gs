@@ -24,6 +24,6 @@ class GosuDocHtmlFactory {
   }
 
   private static function defaultCreate<T,H>(type : Type<H>, coreObject : T) : H {
-    return ReflectUtil.construct(type.Name, {coreObject}) as H
+    return ReflectUtil.construct(type.Name, {coreObject})
   }
 }
